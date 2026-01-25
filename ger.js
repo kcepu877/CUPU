@@ -8,7 +8,7 @@ const QRISPayment = require('autoft-qris');
 const winston = require('winston');
 const fetch = require("node-fetch");
 const FormData = require("form-data");
-const FOLDER_TEMPATDB = "/root/BotVPN2/sellvpn.db";
+const FOLDER_TEMPATDB = "/root/CUPU/sellvpn.db";
 const UPGRADE_RESELLER_TOPUP_THRESHOLD = 30000; // Minimal topup untuk upgrade reseller otomatis
 const logger = winston.createLogger({
   level: 'info',
