@@ -17,7 +17,7 @@ hapus_bot_lama() {
     systemctl disable sellvpn.service 2>/dev/null
     rm -f /etc/systemd/system/sellvpn.service
     rm -f /usr/bin/sellvpn /usr/bin/server_sellvpn /etc/cron.d/server_sellvpn
-    rm -rf /root/BotVPN2
+    rm -rf /root/CUPU
 
     if command -v pm2 &> /dev/null; then
         pm2 delete sellvpn &> /dev/null
@@ -50,12 +50,12 @@ setup_bot() {
     timedatectl set-timezone Asia/Jakarta
 
     # Clone Bot
-    if [ ! -d /root/BotVPN2 ]; then
-        git clone https://github.com/myridwan/BotVPN2.git /root/BotVPN2
+    if [ ! -d /root/CUPU ]; then
+        git clone https://github.com/kcepu877/CUPU.git /root/CUPU
     fi
 
     # Install dependencies
-    cd /root/BotVPN2
+    cd /root/CUPU
     rm -rf app.js
     mv app3.js app.js
     npm install sqlite3 express crypto telegraf axios dotenv canvas node-fetch form-data
@@ -64,7 +64,7 @@ setup_bot() {
     npm install
     npm uninstall node-fetch
     npm install node-fetch@2
-    chmod +x /root/BotVPN2/*
+    chmod +x /root/CUPU/*
 }
 
 server_app() {
@@ -103,7 +103,7 @@ server_app() {
     while [ -z "$nomor_wa" ]; do read -p "Masukkan NOMOR WA: " nomor_wa; done
 
     # Simpan konfigurasi ke file .vars.json
-    cat >/root/BotVPN2/.vars.json <<EOF
+    cat >/root/CUPU/.vars.json <<EOF
 {
   "BOT_TOKEN": "$token",
   "USER_ID": "$adminid",
@@ -128,7 +128,7 @@ EOF
     # Buat file autorun menggunakan path node absolut
     cat >/usr/bin/sellvpn <<EOF
 #!/bin/bash
-cd /root/BotVPN2 || exit 1
+cd /root/CUPU || exit 1
 $NODE_PATH app.js
 EOF
     chmod +x /usr/bin/sellvpn
@@ -140,8 +140,8 @@ Description=App Bot sellvpn Service
 After=network.target
 
 [Service]
-ExecStart=$NODE_PATH /root/BotVPN2/app.js
-WorkingDirectory=/root/BotVPN2
+ExecStart=$NODE_PATH /root/CUPU/app.js
+WorkingDirectory=/root/CUPU
 Restart=always
 RestartSec=3
 User=root
