@@ -68,7 +68,7 @@ setup_bot() {
 server_app() {
     clear
     echo -e "${orange}─────────────────────────────────────────${neutral}"
-    echo -e "${green}- BOT SELLVPN TELEGRAM MOD BY LITE & XWAN${neutral}"
+    echo -e "${green}- BOT SELLVPN TELEGRAM MOD BY LITE & CUPU${neutral}"
     echo -e "${orange}─────────────────────────────────────────${neutral}"
 
     read -p "Masukkan token bot: " token
@@ -110,7 +110,7 @@ server_app() {
   "BOT_TOKEN": "$token",
   "USER_ID": "$adminid",
   "NAMA_STORE": "$namastore",
-  "PORT": "50123",
+  "PORT": "5888",
   "DATA_QRIS": "$dataqris",
   "MERCHANT_ID": "$merchantid",
   "API_KEY": "$apikey",
