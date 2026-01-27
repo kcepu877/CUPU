@@ -566,7 +566,7 @@ async function sendMainMenu(ctx) {
   // Pesan utama dengan format yang sudah padat dan rapi
   const messageText = `
 ╔══════════════════════╗
-≡                    <b>✨ANSENDANT VPN✨</b>                      ≡
+≡                    <b>✨ZERO-STORE✨</b>                      ≡
 ╚══════════════════════╝
 <blockquote>Selamat datang di <b>${NAMA_STORE}</b> 🚀
 Bot otomatis untuk membeli Akun VPN dengan mudah dan cepat.</blockquote>
