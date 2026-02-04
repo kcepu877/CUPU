@@ -68,7 +68,7 @@ setup_bot() {
 server_app() {
     clear
     echo -e "${orange}─────────────────────────────────────────${neutral}"
-    echo -e "${green}- BOT SELLVPN TELEGRAM MOD BY LITE & CUPU${neutral}"
+    echo -e "${green}- BOT SELLVPN TELEGRAM MOD BY LITE & Z-STORE${neutral}"
     echo -e "${orange}─────────────────────────────────────────${neutral}"
 
     read -p "Masukkan token bot: " token
@@ -98,11 +98,15 @@ server_app() {
     read -p "Masukkan Email Saweria: " saweria_email
     while [ -z "$apikey" ]; do read -p "Masukkan API KEY: " saweria_email; done
     
-    read -p "Masukkan Username Grup ( zero_store877 ): " username_grup
+    read -p "Masukkan Username Grup ( myridtunnel ): " username_grup
     while [ -z "$username_grup" ]; do read -p "Masukkan USERNAME GRUP: " username_grup; done
     
     read -p "Masukkan Nomor Wa ( 62xxxxx ) : " nomor_wa
     while [ -z "$nomor_wa" ]; do read -p "Masukkan NOMOR WA: " nomor_wa; done
+    
+    read -p "Masukkan AUTH Token Bot  dari @orderkuota_api_bot  : " authx
+    while [ -z "$authx" ]; do read -p "Masukkan TOKEN BOT: " authx; done
+    
 
     # Simpan konfigurasi ke file .vars.json
     cat >/root/CUPU/.vars.json <<EOF
@@ -118,6 +122,7 @@ server_app() {
   "SAWERIA_USERNAME": "username_saweria",
   "SAWERIA_EMAIL": "$saweria_email",
   "ADMIN_WA": "$nomor_wa",
+  "AUTHX": "$authx",
   "GROUP_USERNAME": "$username_grup"
 }
 EOF
