@@ -62,7 +62,7 @@ const SAWERIA_USERNAME = vars.SAWERIA_USERNAME;
 const SAWERIA_EMAIL = vars.SAWERIA_EMAIL;
 
 const BOT_TOKEN = vars.BOT_TOKEN;
-const port = vars.PORT || 50123;
+const port = vars.PORT || 5888;
 const ADMIN = vars.USER_ID;
 const NAMA_STORE = vars.NAMA_STORE || 'XWANSTORE';
 const DATA_QRIS = vars.DATA_QRIS;
