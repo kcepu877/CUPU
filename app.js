@@ -671,7 +671,7 @@ async function sendMainMenu(ctx) {
     // Buat pesan utama
     const messageText = `
 📦━━━━━━━━━━━━━━━━━━━━━📦
-      <b>✨ 🄰🄽🅂🄴🄽🄳🄰🄽🅃 🅅🄿🄽 ✨</b>
+      <b>✨ Z-STORE VPN ✨</b>
 📦━━━━━━━━━━━━━━━━━━━━━📦
 
 <blockquote>ꜱᴇʟᴀᴍᴀᴛ ᴅᴀᴛᴀɴɢ ᴅɪ <b>${NAMA_STORE}</b> 💎
