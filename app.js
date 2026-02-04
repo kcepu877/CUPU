@@ -64,7 +64,7 @@ const SAWERIA_EMAIL = vars.SAWERIA_EMAIL;
 const BOT_TOKEN = vars.BOT_TOKEN;
 const port = vars.PORT || 5888;
 const ADMIN = vars.USER_ID;
-const NAMA_STORE = vars.NAMA_STORE || 'XWANSTORE';
+const NAMA_STORE = vars.NAMA_STORE || 'Z-STORE';
 const DATA_QRIS = vars.DATA_QRIS;
 const MERCHANT_ID = vars.MERCHANT_ID;
 const API_KEY = vars.API_KEY;
@@ -81,9 +81,9 @@ const bot = new Telegraf(BOT_TOKEN);
 
 // Username/Link yang diwajibkan
 const REQUIRED_CHANNEL = '@dstore8';
-const REQUIRED_GROUP   = '@zero_store877';
+const REQUIRED_GROUP   = '@ZstoreVpn';
 const channelLink = 'https://t.me/dstore8';
-const groupLink   = 'https://t.me/zero_store877';
+const groupLink   = 'https://t.me/ZstoreVpn';
 
 /**
  * Kirim UI ajakan bergabung dengan tampilan keren (pakai backticks).
