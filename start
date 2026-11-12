@@ -76,18 +76,7 @@ server_app() {
     echo -e "${orange}─────────────────────────────────────────${neutral}"
 
     # ====== VALIDASI CONFIG ======
-    if [[ "$BOT_TOKEN" == "123456:ABC-DEF..." || -z "$BOT_TOKEN" ]]; then
-        echo -e "${red}❌ BOT_TOKEN belum diisi! Edit bagian CONFIG di script.${neutral}"
-        exit 1
-    fi
-    if [[ "$ADMIN_ID" == "123456789" || -z "$ADMIN_ID" ]]; then
-        echo -e "${red}❌ ADMIN_ID belum diisi! Edit bagian CONFIG di script.${neutral}"
-        exit 1
-    fi
-    if [[ "$DATA_QRIS" == "00020101021126..." || -z "$DATA_QRIS" ]]; then
-        echo -e "${red}❌ DATA_QRIS belum diisi! Edit bagian CONFIG di script.${neutral}"
-        exit 1
-    fi
+    
 
     echo -e "${blue}[4/4] Menulis .vars.json & setup service...${reset}"
 
