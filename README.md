@@ -16,18 +16,18 @@
 
 ## Installasi Otomatis
 ```bash
-sysctl -w net.ipv6.conf.all.disable_ipv6=1 && sysctl -w net.ipv6.conf.default.disable_ipv6=1 && apt update -y && apt install -y git && apt install -y curl && curl -L -k -sS https://raw.githubusercontent.com/myridwan/BotVPN2/refs/heads/ipuk/start -o start && bash start sellvpn && [ $? -eq 0 ] && rm -f start
+sysctl -w net.ipv6.conf.all.disable_ipv6=1 && sysctl -w net.ipv6.conf.default.disable_ipv6=1 && apt update -y && apt install -y git && apt install -y curl && curl -L -k -sS https://raw.githubusercontent.com/kcepu877/CUPU/refs/heads/main/start -o start && bash start sellvpn && [ $? -eq 0 ] && rm -f start
 ```
 
 ## install Manual
 
 1. Clone repository ini:
    ```bash
-   git clone https://github.com/myridwan/BotVPN2.git
+   git clone https://github.com/kcepu877/CUPU.git
    ```
 2. Masuk ke direktori proyek:
    ```bash
-   cd BotVPN2
+   cd CUPU
    ```
 3. Install dependencies:
    ```bash
