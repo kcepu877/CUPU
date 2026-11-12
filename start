@@ -9,8 +9,8 @@ yellow="\e[38;5;226m"
 # ============================================================
 # ============ CONFIG — LANGSUNG ISI NILAI ASLI ==============
 # ============================================================
-BOT_TOKEN="123456:ABC-DEF..."
-ADMIN_ID="123456789"
+BOT_TOKEN="8972465183:AAEUoP3asj3AovUN4jQrHbgiiSW-0rXFgC8"
+ADMIN_ID="8166206712"
 NAMA_STORE="Z-STORE"
 PORT="5888"
 DATA_QRIS="00020101021126..."
@@ -19,7 +19,7 @@ API_KEY="abcdef123456"
 GROUP_CHAT_ID="-1001234567890"
 SAWERIA_USERNAME="namasaweria"
 SAWERIA_EMAIL="email@gmail.com"
-ADMIN_WA="6281234567890"
+ADMIN_WA="6287861167414"
 AUTHX="authxyz123"
 GROUP_USERNAME="ZstoreVpn"
 # ============================================================
