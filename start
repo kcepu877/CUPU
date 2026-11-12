@@ -1,63 +1,60 @@
 #!/bin/bash
+# Colors
 green="\e[38;5;82m"
 red="\e[38;5;196m"
 neutral="\e[0m"
 orange="\e[38;5;130m"
 blue="\e[38;5;39m"
 yellow="\e[38;5;226m"
-
-# ============================================================
-# ============ CONFIG — LANGSUNG ISI NILAI ASLI ==============
-# ============================================================
-BOT_TOKEN="8972465183:AAEUoP3asj3AovUN4jQrHbgiiSW-0rXFgC8"
-ADMIN_ID="8166206712"
-NAMA_STORE="Z-STORE"
-PORT="5888"
-DATA_QRIS="00020101021126..."
-MERCHANT_ID="M123456"
-API_KEY="abcdef123456"
-GROUP_CHAT_ID="-1001234567890"
-SAWERIA_USERNAME="namasaweria"
-SAWERIA_EMAIL="email@gmail.com"
-ADMIN_WA="6287861167414"
-AUTHX="authxyz123"
-GROUP_USERNAME="ZstoreVpn"
-# ============================================================
+purple="\e[38;5;141m"
+bold_white="\e[1;37m"
+reset="\e[0m"
+pink="\e[38;5;205m"
 
 hapus_bot_lama() {
-    echo -e "${orange}[1/4] Menghapus bot lama...${neutral}"
+    echo -e "${orange}Menghapus bot lama...${neutral}"
     systemctl stop sellvpn.service 2>/dev/null
     systemctl disable sellvpn.service 2>/dev/null
     rm -f /etc/systemd/system/sellvpn.service
     rm -f /usr/bin/sellvpn /usr/bin/server_sellvpn /etc/cron.d/server_sellvpn
     rm -rf /root/CUPU
+
     if command -v pm2 &> /dev/null; then
         pm2 delete sellvpn &> /dev/null
         pm2 save &> /dev/null
     fi
+
     systemctl daemon-reload
-    echo -e "${green}✅ Bot lama dihapus.${neutral}"
+    echo -e "${green}Bot lama berhasil dihapus.${neutral}"
 }
 
 pasang_package() {
-    echo -e "${blue}[2/4] Install Node.js & dependensi APT...${reset}"
+    echo -e "${blue}Memulai pengecekan dan instalasi dependensi...${reset}"
+
+    # Install Node.js v20 (stabil untuk Debian 10+/Ubuntu 20+)
     if ! command -v node >/dev/null 2>&1 || ! node -v | grep -q 'v20'; then
         curl -fsSL https://deb.nodesource.com/setup_20.x | bash -
         apt-get install -y nodejs
     fi
+
+    # Downgrade npm ke versi 10 agar kompatibel
     npm install -g npm@10
+
+    # Install dependencies APT
     apt update
     apt install -y build-essential libcairo2-dev libpango1.0-dev \
         libjpeg-dev libgif-dev librsvg2-dev pkg-config libpixman-1-dev git curl cron
-    echo -e "${green}✅ Dependensi APT selesai.${neutral}"
 }
 
 setup_bot() {
-    echo -e "${blue}[3/4] Clone repo & install dependencies Node...${reset}"
     timedatectl set-timezone Asia/Jakarta
+
+    # Clone Bot
     if [ ! -d /root/CUPU ]; then
         git clone https://github.com/kcepu877/CUPU.git /root/CUPU
     fi
+
+    # Install dependencies
     cd /root/CUPU
     npm install sqlite3 express crypto telegraf axios dotenv canvas node-fetch form-data
     npm rebuild canvas
@@ -66,7 +63,6 @@ setup_bot() {
     npm uninstall node-fetch
     npm install node-fetch@2
     chmod +x /root/CUPU/*
-    echo -e "${green}✅ Dependencies Node selesai.${neutral}"
 }
 
 server_app() {
@@ -75,38 +71,69 @@ server_app() {
     echo -e "${green}- BOT SELLVPN TELEGRAM MOD BY LITE & Z-STORE${neutral}"
     echo -e "${orange}─────────────────────────────────────────${neutral}"
 
-    # ====== VALIDASI CONFIG ======
+    read -p "Masukkan token bot: " token
+    while [ -z "$token" ]; do read -p "Masukkan token bot: " token; done
+
+    read -p "Masukkan admin ID: " adminid
+    while [ -z "$adminid" ]; do read -p "Masukkan admin ID: " adminid; done
+
+    read -p "Masukkan nama store: " namastore
+    while [ -z "$namastore" ]; do read -p "Masukkan nama store: " namastore; done
+
+    read -p "Masukkan DATA QRIS: " dataqris
+    while [ -z "$dataqris" ]; do read -p "Masukkan DATA QRIS: " dataqris; done
+
+    read -p "Masukkan MERCHANT ID: " merchantid
+    while [ -z "$merchantid" ]; do read -p "Masukkan MERCHANT ID: " merchantid; done
+
+    read -p "Masukkan API KEY: " apikey
+    while [ -z "$apikey" ]; do read -p "Masukkan API KEY: " apikey; done
     
+    read -p "Masukkan Chat ID Group Telegram: " chatid_group
+    while [ -z "$apikey" ]; do read -p "Masukkan API KEY: " chatid_group; done
+    
+    read -p "Masukkan Username Saweria: " username_saweria
+    while [ -z "$apikey" ]; do read -p "Masukkan API KEY: " username_saweria; done
+    
+    read -p "Masukkan Email Saweria: " saweria_email
+    while [ -z "$apikey" ]; do read -p "Masukkan API KEY: " saweria_email; done
+    
+    read -p "Masukkan Username Grup ( ZstoreVpn ): " username_grup
+    while [ -z "$username_grup" ]; do read -p "Masukkan USERNAME GRUP: " username_grup; done
+    
+    read -p "Masukkan Nomor Wa ( 62xxxxx ) : " nomor_wa
+    while [ -z "$nomor_wa" ]; do read -p "Masukkan NOMOR WA: " nomor_wa; done
+    
+        
 
-    echo -e "${blue}[4/4] Menulis .vars.json & setup service...${reset}"
-
+    # Simpan konfigurasi ke file .vars.json
     cat >/root/CUPU/.vars.json <<EOF
 {
-  "BOT_TOKEN": "$BOT_TOKEN",
-  "USER_ID": "$ADMIN_ID",
-  "NAMA_STORE": "$NAMA_STORE",
-  "PORT": "$PORT",
-  "DATA_QRIS": "$DATA_QRIS",
-  "MERCHANT_ID": "$MERCHANT_ID",
-  "API_KEY": "$API_KEY",
-  "GROUP_CHAT_ID": "$GROUP_CHAT_ID",
-  "SAWERIA_USERNAME": "$SAWERIA_USERNAME",
-  "SAWERIA_EMAIL": "$SAWERIA_EMAIL",
-  "ADMIN_WA": "$ADMIN_WA",
-  "AUTHX": "$AUTHX",
-  "GROUP_USERNAME": "$GROUP_USERNAME"
+  "BOT_TOKEN": "$token",
+  "USER_ID": "$adminid",
+  "NAMA_STORE": "$namastore",
+  "PORT": "5888",
+  "DATA_QRIS": "$dataqris",
+  "MERCHANT_ID": "$merchantid",
+  "API_KEY": "$apikey",
+  "GROUP_CHAT_ID": "$chatid_group",
+  "SAWERIA_USERNAME": "username_saweria",
+  "SAWERIA_EMAIL": "$saweria_email",
+  "ADMIN_WA": "$nomor_wa",
+  "AUTHX": "$authx",
+  "GROUP_USERNAME": "$username_grup"
 }
 EOF
 
-    echo -e "${green}✅ .vars.json tersimpan di /root/CUPU/.vars.json${neutral}"
-
+    # Deteksi lokasi node secara otomatis
     NODE_PATH=$(which node)
     if [ -z "$NODE_PATH" ]; then
-        echo -e "${red}❌ Node.js tidak ditemukan.${neutral}"
+        echo -e "${red}Node.js tidak ditemukan. Pastikan Node.js sudah terinstall.${neutral}"
         exit 1
     fi
-    echo -e "${green}✅ Node.js: $NODE_PATH${neutral}"
+    echo -e "${green}Node.js ditemukan di: $NODE_PATH${neutral}"
 
+    # Buat file autorun menggunakan path node absolut
     cat >/usr/bin/sellvpn <<EOF
 #!/bin/bash
 cd /root/CUPU || exit 1
@@ -114,6 +141,7 @@ $NODE_PATH app.js
 EOF
     chmod +x /usr/bin/sellvpn
 
+    # Buat systemd service file dengan ExecStart menggunakan path node absolut
     cat >/etc/systemd/system/sellvpn.service <<EOF
 [Unit]
 Description=App Bot sellvpn Service
@@ -140,30 +168,16 @@ EOF
     systemctl start sellvpn
     service cron restart
 
-    sleep 2
-
-    echo -e "${orange}─────────────────────────────────────────${neutral}"
     echo -e "Status Server: $(systemctl is-active sellvpn)"
-    echo -e "${green}✅ Bot berhasil diinstal dan berjalan.${neutral}"
-    echo -e "${orange}─────────────────────────────────────────${neutral}"
-    echo -e "📋 Log realtime : ${yellow}journalctl -u sellvpn -f${neutral}"
-    echo -e "📋 Log file     : ${yellow}tail -f /var/log/sellvpn.log${neutral}"
-    echo -e "🔄 Restart      : ${yellow}systemctl restart sellvpn${neutral}"
-    echo -e "🛑 Stop         : ${yellow}systemctl stop sellvpn${neutral}"
-    echo -e "▶️  Start        : ${yellow}systemctl start sellvpn${neutral}"
-    echo -e "📊 Status       : ${yellow}systemctl status sellvpn${neutral}"
-    echo -e "${orange}─────────────────────────────────────────${neutral}"
+    echo -e "${green}Bot berhasil diinstal dan sedang berjalan.${neutral}"
 }
 
-# ============================================================
-# MAIN
-# ============================================================
 if [[ $1 == "sellvpn" ]]; then
     hapus_bot_lama
     pasang_package
     setup_bot
     server_app
 else
-    echo -e "${red}Gunakan: bash start sellvpn${neutral}"
+    echo -e "${red}Perintah tidak valid. Gunakan: ${yellow}start sellvpn${neutral}"
     exit 1
 fi
